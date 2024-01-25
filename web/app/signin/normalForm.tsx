@@ -283,13 +283,13 @@ const NormalForm = () => {
             <Link
               className='text-primary-600'
               target={'_blank'}
-              href={language !== LanguagesSupportedUnderscore[1] ? 'https://docs.dify.ai/user-agreement/terms-of-service' : 'https://docs.dify.ai/v/zh-hans/user-agreement/terms-of-service'}
+              href={language !== LanguagesSupportedUnderscore[1] ? 'https://cdn.nextv.show/about/baizeai/useragreement.html' : 'https://cdn.nextv.show/about/baizeai/useragreement.html'}
             >{t('login.tos')}</Link>
             &nbsp;&&nbsp;
             <Link
               className='text-primary-600'
               target={'_blank'}
-              href={language !== LanguagesSupportedUnderscore[1] ? 'https://docs.dify.ai/user-agreement/privacy-policy' : 'https://docs.dify.ai/v/zh-hans/user-agreement/privacy-policy'}
+              href={language !== LanguagesSupportedUnderscore[1] ? 'https://cdn.nextv.show/about/baizeai/privacy.html' : 'https://cdn.nextv.show/about/baizeai/privacy.html'}
             >{t('login.pp')}</Link>
           </div>
 

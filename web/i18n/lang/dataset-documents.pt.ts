@@ -1,7 +1,7 @@
 const translation = {
   list: {
     title: 'Documentos',
-    desc: 'Todos os arquivos do Knowledge são mostrados aqui, e todo o Knowledge pode ser vinculado a citações do Dify ou indexado por meio do plugin Chat.',
+    desc: 'Todos os arquivos do Knowledge são mostrados aqui, e todo o Knowledge pode ser vinculado a citações do BaizeAI ou indexado por meio do plugin Chat.',
     addFile: 'adicionar arquivo',
     addPages: 'Adicionar Páginas',
     table: {

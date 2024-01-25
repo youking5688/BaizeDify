@@ -104,26 +104,8 @@ export default function AppSelector({ isMobile }: IAppSelecotr) {
                     <Menu.Item>
                       <Link
                         className={classNames(itemClassName, 'group justify-between')}
-                        href='https://feedback.dify.ai/'
-                        target='_blank'>
-                        <div>{t('common.userProfile.roadmapAndFeedback')}</div>
-                        <ArrowUpRight className='hidden w-[14px] h-[14px] text-gray-500 group-hover:flex' />
-                      </Link>
-                    </Menu.Item>
-                    <Menu.Item>
-                      <Link
-                        className={classNames(itemClassName, 'group justify-between')}
-                        href='https://discord.gg/5AEfbxcd9k'
-                        target='_blank'>
-                        <div>{t('common.userProfile.community')}</div>
-                        <ArrowUpRight className='hidden w-[14px] h-[14px] text-gray-500 group-hover:flex' />
-                      </Link>
-                    </Menu.Item>
-                    <Menu.Item>
-                      <Link
-                        className={classNames(itemClassName, 'group justify-between')}
                         href={
-                          language !== LanguagesSupportedUnderscore[1] ? 'https://docs.dify.ai/' : `https://docs.dify.ai/v/${locale.toLowerCase()}/`
+                          language !== LanguagesSupportedUnderscore[1] ? '#' : `#`
                         }
                         target='_blank'>
                         <div>{t('common.userProfile.helpCenter')}</div>

@@ -35,7 +35,7 @@ const translation = {
       openaiHosted: 'OpenAI Hospedado',
       onTrial: 'EM TESTE',
       exhausted: 'COTA ESGOTADA',
-      desc: 'O serviço de hospedagem OpenAI fornecido pela Dify permite que você use modelos como o GPT-3.5. Antes que sua cota de teste seja esgotada, você precisa configurar outros provedores de modelo.',
+      desc: 'O serviço de hospedagem OpenAI fornecido pela BaizeAI permite que você use modelos como o GPT-3.5. Antes que sua cota de teste seja esgotada, você precisa configurar outros provedores de modelo.',
       callTimes: 'Número de chamadas',
       usedUp: 'Cota de teste esgotada. Adicione seu próprio provedor de modelo.',
       useYourModel: 'Atualmente usando seu próprio provedor de modelo.',
