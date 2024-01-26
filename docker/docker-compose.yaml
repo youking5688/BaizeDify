@@ -102,11 +102,11 @@ services:
       # The milvus tls switch.
       MILVUS_SECURE: 'false'
       # Mail configuration, support: resend
-      MAIL_TYPE: ''
+      MAIL_TYPE: 'resend'
       # default send from email address, if not specified
-      MAIL_DEFAULT_SEND_FROM: 'YOUR EMAIL FROM (eg: no-reply <no-reply@dify.ai>)'
+      MAIL_DEFAULT_SEND_FROM: 'YOUR EMAIL FROM ( <baizeai@nextv.show>)'
       # the api-key for resend (https://resend.com)
-      RESEND_API_KEY: ''
+      RESEND_API_KEY: 're_4UZNYUwm_L191HFzZ42xWRjERmrfdxbKT'
       RESEND_API_URL: https://api.resend.com
       # The DSN for Sentry error reporting. If not set, Sentry error reporting will be disabled.
       SENTRY_DSN: ''
