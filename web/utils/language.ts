@@ -7,18 +7,18 @@ export const LanguagesSupported = ['en-US', 'zh-Hans', 'pt-BR', 'es-ES', 'fr-FR'
 export const LanguagesSupportedUnderscore = ['en_US', 'zh_Hans', 'pt_BR', 'es_ES', 'fr_FR', 'de_DE', 'ja_JP', 'ko_KR', 'ru_RU', 'it_IT']
 
 export const languages = [
-  {
-    value: 'en-US',
-    name: 'English(United States)',
-  },
+  // {
+  //   value: 'en-US',
+  //   name: 'English(United States)',
+  // },
   {
     value: 'zh-Hans',
     name: '简体中文',
   },
-  {
-    value: 'pt-BR',
-    name: 'Português(Brasil)',
-  },
+  // {
+  //   value: 'pt-BR',
+  //   name: 'Português(Brasil)',
+  // },
   // {
   //   value: 'es-ES',
   //   name: 'Español(España)',
