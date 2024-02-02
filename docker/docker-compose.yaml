@@ -114,6 +114,10 @@ services:
       SENTRY_TRACES_SAMPLE_RATE: 1.0
       # The sample rate for Sentry profiles. Default: `1.0`
       SENTRY_PROFILES_SAMPLE_RATE: 1.0
+      # 上传文件大小限制，默认 15M
+      UPLOAD_FILE_SIZE_LIMIT: 50
+      # 每次上传文件数上限，默认 5 个
+      UPLOAD_FILE_BATCH_LIMIT: 5
     depends_on:
       - db
       - redis
