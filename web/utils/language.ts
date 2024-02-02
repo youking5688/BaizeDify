@@ -83,14 +83,14 @@ export type I18nText = {
 
 export const NOTICE_I18N = {
   title: {
-    'en-US': 'Important Notice',
-    'zh-Hans': '重要公告',
-    'pt-BR': 'Aviso Importante',
-    'es-ES': 'Aviso Importante',
-    'fr-FR': 'Avis important',
-    'de-DE': 'Wichtiger Hinweis',
-    'ja-JP': '重要なお知らせ',
-    'ko-KR': '중요 공지',
+    en_US: 'Important Notice',
+    zh_Hans: '重要公告',
+    pt_BR: 'Aviso Importante',
+    es_ES: 'Aviso Importante',
+    fr_FR: 'Avis important',
+    de_DE: 'Wichtiger Hinweis',
+    ja_JP: '重要なお知らせ',
+    ko_KR: '중요 공지',
   },
   desc: {
     'en-US': 'Our system will be unavailable from 19:00 to 24:00 UTC on August 28 for an upgrade. For questions, kindly contact our support team (support@dify.ai). We value your patience.',
