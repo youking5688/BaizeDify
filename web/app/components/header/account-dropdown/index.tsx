@@ -62,7 +62,7 @@ export default function AppSelector({ isMobile }: IAppSelecotr) {
                   <Avatar name={userProfile.name} className='sm:mr-2 mr-0' size={32} />
                   {!isMobile && <>
                     {userProfile.name}
-                    <ChevronDown className="w-3 h-3 ml-1 text-gray-700"/>
+                    <ChevronDown className="w-3 h-3 ml-1 text-gray-700" />
                   </>}
                 </Menu.Button>
               </div>
@@ -107,7 +107,7 @@ export default function AppSelector({ isMobile }: IAppSelecotr) {
                         href={
                           language !== LanguagesSupportedUnderscore[1] ? '#' : `#`
                         }
-                        target='_blank'>
+                        target='_blank' rel='noopener noreferrer'>
                         <div>{t('common.userProfile.helpCenter')}</div>
                         <ArrowUpRight className='hidden w-[14px] h-[14px] text-gray-500 group-hover:flex' />
                       </Link>

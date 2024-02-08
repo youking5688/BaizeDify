@@ -1,9 +1,10 @@
 from typing import Any, Dict, List, Union
 
 import yfinance
+from requests.exceptions import HTTPError, ReadTimeout
+
 from core.tools.entities.tool_entities import ToolInvokeMessage
 from core.tools.tool.builtin_tool import BuiltinTool
-from requests.exceptions import HTTPError, ReadTimeout
 
 
 class YahooFinanceSearchTickerTool(BuiltinTool):
@@ -20,7 +21,7 @@ class YahooFinanceSearchTickerTool(BuiltinTool):
         try:
             return self.run(ticker=query, user_id=user_id)
         except (HTTPError, ReadTimeout):
-            return self.create_text_message(f'There is a internet connection problem. Please try again later.')
+            return self.create_text_message('There is a internet connection problem. Please try again later.')
 
     def run(self, ticker: str, user_id: str) -> ToolInvokeMessage:
         company = yfinance.Ticker(ticker)

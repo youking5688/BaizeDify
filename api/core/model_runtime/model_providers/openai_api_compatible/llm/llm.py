@@ -5,15 +5,31 @@ from typing import Generator, List, Optional, Union, cast
 from urllib.parse import urljoin
 
 import requests
+
 from core.model_runtime.entities.common_entities import I18nObject
 from core.model_runtime.entities.llm_entities import LLMMode, LLMResult, LLMResultChunk, LLMResultChunkDelta
-from core.model_runtime.entities.message_entities import (AssistantPromptMessage, ImagePromptMessageContent,
-                                                          PromptMessage, PromptMessageContent, PromptMessageContentType,
-                                                          PromptMessageFunction, PromptMessageTool, SystemPromptMessage,
-                                                          ToolPromptMessage, UserPromptMessage)
-from core.model_runtime.entities.model_entities import (AIModelEntity, DefaultParameterName, FetchFrom,
-                                                        ModelPropertyKey, ModelType, ParameterRule, ParameterType,
-                                                        PriceConfig)
+from core.model_runtime.entities.message_entities import (
+    AssistantPromptMessage,
+    ImagePromptMessageContent,
+    PromptMessage,
+    PromptMessageContent,
+    PromptMessageContentType,
+    PromptMessageFunction,
+    PromptMessageTool,
+    SystemPromptMessage,
+    ToolPromptMessage,
+    UserPromptMessage,
+)
+from core.model_runtime.entities.model_entities import (
+    AIModelEntity,
+    DefaultParameterName,
+    FetchFrom,
+    ModelPropertyKey,
+    ModelType,
+    ParameterRule,
+    ParameterType,
+    PriceConfig,
+)
 from core.model_runtime.errors.invoke import InvokeError
 from core.model_runtime.errors.validate import CredentialsValidateFailedError
 from core.model_runtime.model_providers.__base.large_language_model import LargeLanguageModel
@@ -130,16 +146,16 @@ class OAIAPICompatLargeLanguageModel(_CommonOAI_API_Compat, LargeLanguageModel):
             try:
                 json_result = response.json()
             except json.JSONDecodeError as e:
-                raise CredentialsValidateFailedError(f'Credentials validation failed: JSON decode error')
+                raise CredentialsValidateFailedError('Credentials validation failed: JSON decode error')
 
             if (completion_type is LLMMode.CHAT
                     and ('object' not in json_result or json_result['object'] != 'chat.completion')):
                 raise CredentialsValidateFailedError(
-                    f'Credentials validation failed: invalid response object, must be \'chat.completion\'')
+                    'Credentials validation failed: invalid response object, must be \'chat.completion\'')
             elif (completion_type is LLMMode.COMPLETION
                   and ('object' not in json_result or json_result['object'] != 'text_completion')):
                 raise CredentialsValidateFailedError(
-                    f'Credentials validation failed: invalid response object, must be \'text_completion\'')
+                    'Credentials validation failed: invalid response object, must be \'text_completion\'')
         except CredentialsValidateFailedError:
             raise
         except Exception as ex:

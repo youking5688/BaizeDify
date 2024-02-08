@@ -46,8 +46,17 @@ export default function AccountAbout({
             <div>© 2023 BaizeAI.</div>
             <div className='text-[#1C64F2]'>
               {
+<<<<<<< HEAD
                 <Link href={language !== LanguagesSupportedUnderscore[1] ? 'https://cdn.nextv.show/about/baizeai/privacy.html' : 'https://cdn.nextv.show/about/baizeai/privacy.html'} target='_blank'>Privacy Policy</Link>,
                 <Link href={language !== LanguagesSupportedUnderscore[1] ? 'https://cdn.nextv.show/about/baizeai/useragreement.html' : 'https://cdn.nextv.show/about/baizeai/useragreement.html'} target='_blank'>Terms of Service</Link>
+=======
+                IS_CE_EDITION
+                  ? <Link href={'https://github.com/langgenius/dify/blob/main/LICENSE'} target='_blank' rel='noopener noreferrer'>Open Source License</Link>
+                  : <>
+                    <Link href={language !== LanguagesSupportedUnderscore[1] ? 'https://docs.dify.ai/user-agreement/privacy-policy' : 'https://docs.dify.ai/v/zh-hans/user-agreement/privacy-policy'} target='_blank' rel='noopener noreferrer'>Privacy Policy</Link>,
+                    <Link href={language !== LanguagesSupportedUnderscore[1] ? 'https://docs.dify.ai/user-agreement/terms-of-service' : 'https://docs.dify.ai/v/zh-hans/user-agreement/terms-of-service'} target='_blank' rel='noopener noreferrer'>Terms of Service</Link>
+                  </>
+>>>>>>> upstream/main
               }
             </div>
           </div>
@@ -64,8 +73,13 @@ export default function AccountAbout({
           <div className='flex items-center'>
             <Link
               className={classNames(buttonClassName, 'mr-2')}
+<<<<<<< HEAD
               href={'#'}
               target='_blank'
+=======
+              href={'https://github.com/langgenius/dify/releases'}
+              target='_blank' rel='noopener noreferrer'
+>>>>>>> upstream/main
             >
               {t('common.about.changeLog')}
             </Link>
@@ -74,7 +88,7 @@ export default function AccountAbout({
                 <Link
                   className={classNames(buttonClassName, 'text-primary-600')}
                   href={langeniusVersionInfo.release_notes}
-                  target='_blank'
+                  target='_blank' rel='noopener noreferrer'
                 >
                   {t('common.about.updateNow')}
                 </Link>

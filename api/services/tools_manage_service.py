@@ -1,10 +1,17 @@
 import json
-from typing import List, Tuple
+from typing import List
+
+from flask import current_app
+from httpx import get
 
 from core.tools.entities.common_entities import I18nObject
 from core.tools.entities.tool_bundle import ApiBasedToolBundle
-from core.tools.entities.tool_entities import (ApiProviderAuthType, ApiProviderSchemaType, ToolCredentialsOption,
-                                               ToolProviderCredentials)
+from core.tools.entities.tool_entities import (
+    ApiProviderAuthType,
+    ApiProviderSchemaType,
+    ToolCredentialsOption,
+    ToolProviderCredentials,
+)
 from core.tools.entities.user_entities import UserTool, UserToolProvider
 from core.tools.errors import ToolNotFoundError, ToolProviderCredentialValidationError, ToolProviderNotFoundError
 from core.tools.provider.api_tool_provider import ApiBasedToolProviderController
@@ -14,8 +21,6 @@ from core.tools.utils.configuration import ToolConfiguration
 from core.tools.utils.encoder import serialize_base_model_array, serialize_base_model_dict
 from core.tools.utils.parser import ApiBasedToolSchemaParser
 from extensions.ext_database import db
-from flask import current_app
-from httpx import get
 from models.tools import ApiToolProvider, BuiltinToolProvider
 
 
@@ -45,7 +50,7 @@ class ToolManageService:
             :param provider: the provider dict
         """
         url_prefix = (current_app.config.get("CONSOLE_API_URL")
-                      + f"/console/api/workspaces/current/tool-provider/builtin/")
+                      + "/console/api/workspaces/current/tool-provider/builtin/")
         
         if 'icon' in provider:
             if provider['type'] == UserToolProvider.ProviderType.BUILTIN.value:
@@ -206,7 +211,7 @@ class ToolManageService:
         tool_bundles, schema_type = ToolManageService.convert_schema_to_tool_bundles(schema, extra_info)
         
         if len(tool_bundles) > 10:
-            raise ValueError(f'the number of apis should be less than 10')
+            raise ValueError('the number of apis should be less than 10')
 
         # create db provider
         db_provider = ApiToolProvider(
@@ -264,7 +269,7 @@ class ToolManageService:
             # try to parse schema, avoid SSRF attack
             ToolManageService.parser_api_schema(schema)
         except Exception as e:
-            raise ValueError(f'invalid schema, please check the url you provided')
+            raise ValueError('invalid schema, please check the url you provided')
         
         return {
             'schema': schema
@@ -485,7 +490,7 @@ class ToolManageService:
         try:
             tool_bundles, _ = ApiBasedToolSchemaParser.auto_parse_to_tool_bundle(schema)
         except Exception as e:
-            raise ValueError(f'invalid schema')
+            raise ValueError('invalid schema')
         
         # get tool bundle
         tool_bundle = next(filter(lambda tb: tb.operation_id == tool_name, tool_bundles), None)
@@ -521,8 +526,8 @@ class ToolManageService:
                 'credentials': credentials,
                 'tenant_id': tenant_id,
             })
-            tool.validate_credentials(credentials, parameters)
+            result = tool.validate_credentials(credentials, parameters)
         except Exception as e:
             return { 'error': str(e) }
         
-        return { 'result': 'success' }
+        return { 'result': result or 'empty response' }

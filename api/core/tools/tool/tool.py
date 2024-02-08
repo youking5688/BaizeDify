@@ -2,11 +2,19 @@ from abc import ABC, abstractmethod
 from enum import Enum
 from typing import Any, Dict, List, Optional, Union
 
-from core.callback_handler.agent_tool_callback_handler import DifyAgentCallbackHandler
-from core.tools.entities.tool_entities import (ToolDescription, ToolIdentity, ToolInvokeMessage, ToolParameter,
-                                               ToolRuntimeImageVariable, ToolRuntimeVariable, ToolRuntimeVariablePool)
-from core.tools.tool_file_manager import ToolFileManager
 from pydantic import BaseModel
+
+from core.callback_handler.agent_tool_callback_handler import DifyAgentCallbackHandler
+from core.tools.entities.tool_entities import (
+    ToolDescription,
+    ToolIdentity,
+    ToolInvokeMessage,
+    ToolParameter,
+    ToolRuntimeImageVariable,
+    ToolRuntimeVariable,
+    ToolRuntimeVariablePool,
+)
+from core.tools.tool_file_manager import ToolFileManager
 
 
 class Tool(BaseModel, ABC):
@@ -213,7 +221,7 @@ class Tool(BaseModel, ABC):
                 result += f"result link: {response.message}. please tell user to check it."
             elif response.type == ToolInvokeMessage.MessageType.IMAGE_LINK or \
                  response.type == ToolInvokeMessage.MessageType.IMAGE:
-                result += f"image has been created and sent to user already, you should tell user to check it now."
+                result += "image has been created and sent to user already, you should tell user to check it now."
             elif response.type == ToolInvokeMessage.MessageType.BLOB:
                 if len(response.message) > 114:
                     result += str(response.message[:114]) + '...'

@@ -1,18 +1,27 @@
 import json
-import logging
 import re
 from typing import Dict, Generator, List, Literal, Union
 
 from core.application_queue_manager import PublishFrom
 from core.entities.application_entities import AgentPromptEntity, AgentScratchpadUnit
 from core.features.assistant_base_runner import BaseAssistantApplicationRunner
-from core.model_manager import ModelInstance
 from core.model_runtime.entities.llm_entities import LLMResult, LLMResultChunk, LLMResultChunkDelta, LLMUsage
-from core.model_runtime.entities.message_entities import (AssistantPromptMessage, PromptMessage, PromptMessageTool,
-                                                          SystemPromptMessage, UserPromptMessage)
+from core.model_runtime.entities.message_entities import (
+    AssistantPromptMessage,
+    PromptMessage,
+    PromptMessageTool,
+    SystemPromptMessage,
+    UserPromptMessage,
+)
 from core.model_runtime.utils.encoders import jsonable_encoder
-from core.tools.errors import (ToolInvokeError, ToolNotFoundError, ToolNotSupportedError, ToolParameterValidationError,
-                               ToolProviderCredentialValidationError, ToolProviderNotFoundError)
+from core.tools.errors import (
+    ToolInvokeError,
+    ToolNotFoundError,
+    ToolNotSupportedError,
+    ToolParameterValidationError,
+    ToolProviderCredentialValidationError,
+    ToolProviderNotFoundError,
+)
 from models.model import Conversation, Message
 
 
@@ -20,6 +29,7 @@ class AssistantCotApplicationRunner(BaseAssistantApplicationRunner):
     def run(self, conversation: Conversation,
         message: Message,
         query: str,
+        inputs: Dict[str, str],
     ) -> Union[Generator, LLMResult]:
         """
         Run Cot agent application
@@ -34,6 +44,11 @@ class AssistantCotApplicationRunner(BaseAssistantApplicationRunner):
             # TODO: stop words
             if 'Observation' not in app_orchestration_config.model_config.stop:
                 app_orchestration_config.model_config.stop.append('Observation')
+
+        # override inputs
+        inputs = inputs or {}
+        instruction = self.app_orchestration_config.prompt_template.simple_prompt_template
+        instruction = self._fill_in_inputs_from_external_data_tools(instruction, inputs)
 
         iteration_step = 1
         max_iteration_steps = min(self.app_orchestration_config.agent.max_iteration, 5) + 1
@@ -108,7 +123,7 @@ class AssistantCotApplicationRunner(BaseAssistantApplicationRunner):
                 tools=prompt_messages_tools,
                 agent_scratchpad=agent_scratchpad,
                 agent_prompt_message=app_orchestration_config.agent.prompt,
-                instruction=app_orchestration_config.prompt_template.simple_prompt_template,
+                instruction=instruction,
                 input=query
             )
 
@@ -223,7 +238,7 @@ class AssistantCotApplicationRunner(BaseAssistantApplicationRunner):
 
                             message_file_ids = [message_file.id for message_file, _ in message_files]
                         except ToolProviderCredentialValidationError as e:
-                            error_response = f"Please check your tool provider credentials"
+                            error_response = "Please check your tool provider credentials"
                         except (
                             ToolNotFoundError, ToolNotSupportedError, ToolProviderNotFoundError
                         ) as e:
@@ -299,6 +314,18 @@ class AssistantCotApplicationRunner(BaseAssistantApplicationRunner):
             usage=llm_usage['usage'] if llm_usage['usage'] else LLMUsage.empty_usage(),
             system_fingerprint=''
         ), PublishFrom.APPLICATION_MANAGER)
+
+    def _fill_in_inputs_from_external_data_tools(self, instruction: str, inputs: dict) -> str:
+        """
+        fill in inputs from external data tools
+        """
+        for key, value in inputs.items():
+            try:
+                instruction = instruction.replace(f'{{{{{key}}}}}', str(value))
+            except Exception as e:
+                continue
+
+        return instruction
 
     def _extract_response_scratchpad(self, content: str) -> AgentScratchpadUnit:
         """
@@ -446,7 +473,7 @@ class AssistantCotApplicationRunner(BaseAssistantApplicationRunner):
         next_iteration = agent_prompt_message.next_iteration
 
         if not isinstance(first_prompt, str) or not isinstance(next_iteration, str):
-            raise ValueError(f"first_prompt or next_iteration is required in CoT agent mode")
+            raise ValueError("first_prompt or next_iteration is required in CoT agent mode")
         
         # check instruction, tools, and tool_names slots
         if not first_prompt.find("{{instruction}}") >= 0:

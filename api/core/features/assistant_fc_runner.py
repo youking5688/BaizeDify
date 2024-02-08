@@ -4,12 +4,23 @@ from typing import Any, Dict, Generator, List, Tuple, Union
 
 from core.application_queue_manager import PublishFrom
 from core.features.assistant_base_runner import BaseAssistantApplicationRunner
-from core.model_manager import ModelInstance
 from core.model_runtime.entities.llm_entities import LLMResult, LLMResultChunk, LLMResultChunkDelta, LLMUsage
-from core.model_runtime.entities.message_entities import (AssistantPromptMessage, PromptMessage, PromptMessageTool,
-                                                          SystemPromptMessage, ToolPromptMessage, UserPromptMessage)
-from core.tools.errors import (ToolInvokeError, ToolNotFoundError, ToolNotSupportedError, ToolParameterValidationError,
-                               ToolProviderCredentialValidationError, ToolProviderNotFoundError)
+from core.model_runtime.entities.message_entities import (
+    AssistantPromptMessage,
+    PromptMessage,
+    PromptMessageTool,
+    SystemPromptMessage,
+    ToolPromptMessage,
+    UserPromptMessage,
+)
+from core.tools.errors import (
+    ToolInvokeError,
+    ToolNotFoundError,
+    ToolNotSupportedError,
+    ToolParameterValidationError,
+    ToolProviderCredentialValidationError,
+    ToolProviderNotFoundError,
+)
 from models.model import Conversation, Message, MessageAgentThought
 
 logger = logging.getLogger(__name__)
@@ -266,7 +277,7 @@ class AssistantFunctionCallApplicationRunner(BaseAssistantApplicationRunner):
                             message_file_ids.append(message_file.id)
                             
                     except ToolProviderCredentialValidationError as e:
-                        error_response = f"Please check your tool provider credentials"
+                        error_response = "Please check your tool provider credentials"
                     except (
                         ToolNotFoundError, ToolNotSupportedError, ToolProviderNotFoundError
                     ) as e:
