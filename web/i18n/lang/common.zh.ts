@@ -189,6 +189,8 @@ const translation = {
     googleAccount: 'Google 账号登录',
     github: 'GitHub',
     githubAccount: 'GitHub 账号登录',
+    wechat: 'WeChat',
+    wechatAccount: '微信 账号登录',
     connect: '绑定',
   },
   language: {

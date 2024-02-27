@@ -20,10 +20,11 @@ type IState = {
   formValid: boolean
   github: boolean
   google: boolean
+  wechat: boolean
 }
 
 type IAction = {
-  type: 'login' | 'login_failed' | 'github_login' | 'github_login_failed' | 'google_login' | 'google_login_failed'
+  type: 'login' | 'login_failed' | 'github_login' | 'github_login_failed' | 'google_login' | 'google_login_failed' | 'wechat_login' | 'wechat_login_failed'
 }
 
 function reducer(state: IState, action: IAction) {
@@ -53,12 +54,22 @@ function reducer(state: IState, action: IAction) {
         ...state,
         google: true,
       }
-    case 'google_login_failed':
+    case 'wechat_login_failed':
       return {
         ...state,
-        google: false,
+        wechat: false,
       }
-    default:
+      case 'wechat_login':
+        return {
+          ...state,
+          wechat: true,
+        }
+      case 'wechat_login_failed':
+        return {
+          ...state,
+          wechat: false,
+        }
+      default:
       throw new Error('Unknown action.')
   }
 }
@@ -73,6 +84,7 @@ const NormalForm = () => {
     formValid: false,
     github: false,
     google: false,
+    wechat: false,
   })
 
   const [showPassword, setShowPassword] = useState(false)
@@ -120,6 +132,15 @@ const NormalForm = () => {
       url: '/oauth/login/google',
       // params: {
       //   provider: 'google',
+      // },
+    })
+    : null, oauth)
+
+  const { data: wechat, error: wechat_error } = useSWR(state.wechat
+    ? ({
+      url: '/oauth/login/wechat',
+      // params: {
+      //   provider: 'wechat',
       // },
     })
     : null, oauth)
@@ -183,6 +204,25 @@ const NormalForm = () => {
                         )
                       } />
                       <span className="truncate text-gray-800">{t('login.withGoogle')}</span>
+                    </>
+                  </Button>
+                </a>
+              </div>
+              <div className='w-full'>
+                <a href={getPurifyHref(`${apiPrefix}/oauth/login/wechat`)}>
+                  <Button
+                    type='default'
+                    disabled={isLoading}
+                    className='w-full hover:!bg-gray-50 !text-sm !font-medium'
+                  >
+                    <>
+                      <span className={
+                        classNames(
+                          style.githubIcon,
+                          'w-5 h-5 mr-2',
+                        )
+                      } />
+                      <span className="truncate text-gray-800">{t('login.withWechat')}</span>
                     </>
                   </Button>
                 </a>

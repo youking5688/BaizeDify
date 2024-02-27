@@ -29,9 +29,15 @@ def get_oauth_providers():
                                    redirect_uri=current_app.config.get(
                                        'CONSOLE_API_URL') + '/console/api/oauth/authorize/google')
 
+        wechat_oauth = GitHubOAuth(client_id=current_app.config.get('WECHAT_CLIENT_ID'),
+                                   client_secret=current_app.config.get(
+                                       'WECHAT_CLIENT_SECRET'),
+                                   redirect_uri=current_app.config.get(
+                                       'CONSOLE_API_URL') + '/console/api/oauth/authorize/wechat')
         OAUTH_PROVIDERS = {
             'github': github_oauth,
-            'google': google_oauth
+            'google': google_oauth,
+            'wechat': wechat_oauth
         }
         return OAUTH_PROVIDERS
 
@@ -100,7 +106,7 @@ def _generate_account(provider: str, user_info: OAuthUserInfo):
 
     if not account:
         # Create account
-        account_name = user_info.name if user_info.name else 'Dify'
+        account_name = user_info.name if user_info.name else 'Baizeai'
         account = RegisterService.register(
             email=user_info.email,
             name=account_name,
