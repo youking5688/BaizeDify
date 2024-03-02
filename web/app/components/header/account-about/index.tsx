@@ -9,7 +9,7 @@ import { XClose } from '@/app/components/base/icons/src/vender/line/general'
 import type { LangGeniusVersionResponse } from '@/models/common'
 import { IS_CE_EDITION } from '@/config'
 import I18n from '@/context/i18n'
-import { LanguagesSupportedUnderscore, getModelRuntimeSupported } from '@/utils/language'
+import { LanguagesSupported } from '@/i18n/language'
 import LogoSite from '@/app/components/base/logo/logo-site'
 
 type IAccountSettingProps = {
@@ -26,7 +26,6 @@ export default function AccountAbout({
 }: IAccountSettingProps) {
   const { t } = useTranslation()
   const { locale } = useContext(I18n)
-  const language = getModelRuntimeSupported(locale)
   const isLatest = langeniusVersionInfo.current_version === langeniusVersionInfo.latest_version
 
   return (
@@ -46,8 +45,12 @@ export default function AccountAbout({
             <div>© 2023 BaizeAI.</div>
             <div className='text-[#1C64F2]'>
               {
-                <Link href={language !== LanguagesSupportedUnderscore[1] ? 'https://cdn.nextv.show/about/baizeai/privacy.html' : 'https://cdn.nextv.show/about/baizeai/privacy.html'} target='_blank'>Privacy Policy</Link>,
-                <Link href={language !== LanguagesSupportedUnderscore[1] ? 'https://cdn.nextv.show/about/baizeai/useragreement.html' : 'https://cdn.nextv.show/about/baizeai/useragreement.html'} target='_blank'>Terms of Service</Link>
+                IS_CE_EDITION
+                  ? <Link href={'#'} target='_blank' rel='noopener noreferrer'>Open Source License</Link>
+                  : <>
+                    <Link href={locale !== LanguagesSupported[1] ? 'https://cdn.nextv.show/about/baizeai/privacy.html' : 'https://cdn.nextv.show/about/baizeai/privacy.html'} target='_blank' rel='noopener noreferrer'>Privacy Policy</Link>,
+                    <Link href={locale !== LanguagesSupported[1] ? 'https://cdn.nextv.show/about/baizeai/useragreement.html' : 'https://cdn.nextv.show/about/baizeai/useragreement.html'} target='_blank' rel='noopener noreferrer'>Terms of Service</Link>
+                  </>
               }
             </div>
           </div>
@@ -64,8 +67,8 @@ export default function AccountAbout({
           <div className='flex items-center'>
             <Link
               className={classNames(buttonClassName, 'mr-2')}
-              href={'#'}
-              target='_blank'
+              href={'https://github.com/langgenius/dify/releases'}
+              target='_blank' rel='noopener noreferrer'
             >
               {t('common.about.changeLog')}
             </Link>

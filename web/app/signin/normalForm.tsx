@@ -12,7 +12,7 @@ import { IS_CE_EDITION, apiPrefix } from '@/config'
 import Button from '@/app/components/base/button'
 import { login, oauth } from '@/service/common'
 import I18n from '@/context/i18n'
-import { LanguagesSupportedUnderscore, getModelRuntimeSupported } from '@/utils/language'
+import { LanguagesSupported } from '@/i18n/language'
 import { getPurifyHref } from '@/utils'
 const validEmailReg = /^[\w\.-]+@([\w-]+\.)+[\w-]{2,}$/
 
@@ -78,7 +78,6 @@ const NormalForm = () => {
   const { t } = useTranslation()
   const router = useRouter()
   const { locale } = useContext(I18n)
-  const language = getModelRuntimeSupported(locale)
 
   const [state, dispatch] = useReducer(reducer, {
     formValid: false,
@@ -322,14 +321,14 @@ const NormalForm = () => {
             &nbsp;
             <Link
               className='text-primary-600'
-              target={'_blank'}
-              href={language !== LanguagesSupportedUnderscore[1] ? 'https://cdn.nextv.show/about/baizeai/useragreement.html' : 'https://cdn.nextv.show/about/baizeai/useragreement.html'}
+              target='_blank' rel='noopener noreferrer'
+              href={locale !== LanguagesSupported[1] ? 'https://docs.dify.ai/user-agreement/terms-of-service' : 'https://docs.dify.ai/v/zh-hans/user-agreement/terms-of-service'}
             >{t('login.tos')}</Link>
             &nbsp;&&nbsp;
             <Link
               className='text-primary-600'
-              target={'_blank'}
-              href={language !== LanguagesSupportedUnderscore[1] ? 'https://cdn.nextv.show/about/baizeai/privacy.html' : 'https://cdn.nextv.show/about/baizeai/privacy.html'}
+              target='_blank' rel='noopener noreferrer'
+              href={locale !== LanguagesSupported[1] ? 'https://docs.dify.ai/user-agreement/privacy-policy' : 'https://docs.dify.ai/v/zh-hans/user-agreement/privacy-policy'}
             >{t('login.pp')}</Link>
           </div>
 
