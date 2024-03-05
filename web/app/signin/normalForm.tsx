@@ -12,7 +12,6 @@ import { IS_CE_EDITION, apiPrefix } from '@/config'
 import Button from '@/app/components/base/button'
 import { login, oauth } from '@/service/common'
 import I18n from '@/context/i18n'
-import { LanguagesSupported } from '@/i18n/language'
 import { getPurifyHref } from '@/utils'
 const validEmailReg = /^[\w\.-]+@([\w-]+\.)+[\w-]{2,}$/
 
@@ -322,13 +321,14 @@ const NormalForm = () => {
             <Link
               className='text-primary-600'
               target='_blank' rel='noopener noreferrer'
-              href={locale !== LanguagesSupported[1] ? 'https://cdn.nextv.show/about/baizeai/useragreement.html' : 'https://cdn.nextv.show/about/baizeai/useragreement.html'}
+              href='https://cdn.nextv.show/about/baizeai/useragreement.html'
             >{t('login.tos')}</Link>
             &nbsp;&&nbsp;
             <Link
               className='text-primary-600'
               target='_blank' rel='noopener noreferrer'
-              href={locale !== LanguagesSupported[1] ? 'https://cdn.nextv.show/about/baizeai/privacy.html' : 'https://cdn.nextv.show/about/baizeai/privacy.html'}
+              href='https://cdn.nextv.show/about/baizeai/privacy.html'
+              
             >{t('login.pp')}</Link>
           </div>
 
