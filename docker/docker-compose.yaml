@@ -13,14 +13,14 @@ services:
       SECRET_KEY: He7MXBGZ1zLqgNw6istErXDk+Z9gZPv3LLQFwRkQon+bULk41740zyoB
       # The base URL of console application web frontend, refers to the Console base URL of WEB service if console domain is
       # different from api or web app domain.
-      # example: http://cloud.dify.ai
+      # example: http://baizeai.nextv.show
       CONSOLE_WEB_URL: ''
       # Password for admin user initialization.
       # If left unset, admin user will not be prompted for a password when creating the initial admin account.
       INIT_PASSWORD: ''
       # The base URL of console application api server, refers to the Console base URL of WEB service if console domain is
       # different from api or web app domain.
-      # example: http://cloud.dify.ai
+      # example: http://baizeai.nextv.show
       CONSOLE_API_URL: ''
       # The URL prefix for Service API endpoints, refers to the base URL of the current API service if api domain is
       # different from console domain.
@@ -57,7 +57,7 @@ services:
       CELERY_BROKER_URL: redis://:difyai123456@redis:6379/1
       # Specifies the allowed origins for cross-origin requests to the Web API, e.g. https://dify.app or * for all origins.
       WEB_API_CORS_ALLOW_ORIGINS: '*'
-      # Specifies the allowed origins for cross-origin requests to the console API, e.g. https://cloud.dify.ai or * for all origins.
+      # Specifies the allowed origins for cross-origin requests to the console API, e.g. https://baizeai.nextv.show or * for all origins.
       CONSOLE_CORS_ALLOW_ORIGINS: '*'
       # CSRF Cookie settings
       # Controls whether a cookie is sent with cross-site requests,
@@ -216,7 +216,7 @@ services:
       EDITION: SELF_HOSTED
       # The base URL of console application api server, refers to the Console base URL of WEB service if console domain is
       # different from api or web app domain.
-      # example: http://cloud.dify.ai
+      # example: http://baizeai.nextv.show
       CONSOLE_API_URL: ''
       # The URL for Web APP api server, refers to the Web App base URL of WEB service if web app domain is different from
       # console or api domain.
