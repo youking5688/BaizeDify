@@ -374,7 +374,7 @@ const TextGeneration: FC<IMainProps> = ({
       if (canReplaceLogo)
         document.title = `${siteInfo.title}`
       else
-        document.title = `${siteInfo.title} - Powered by BaizeAI`
+        document.title = `白泽AI`
     }
   }, [siteInfo?.title, canReplaceLogo])
 

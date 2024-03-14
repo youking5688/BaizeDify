@@ -45,7 +45,7 @@ const ChatWithHistory: FC<ChatWithHistoryProps> = ({
       if (customConfig)
         document.title = `${site.title}`
       else
-        document.title = `${site.title} - Powered by BaizeAI`
+        document.title = `白泽AI`
     }
   }, [site, customConfig])
 
