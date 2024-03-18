@@ -59,7 +59,9 @@ DEFAULTS = {
     'CAN_REPLACE_LOGO': 'False',
     'ETL_TYPE': 'dify',
     'KEYWORD_STORE': 'jieba',
-    'BATCH_UPLOAD_LIMIT': 20
+    'BATCH_UPLOAD_LIMIT': 20,
+    'WECHAT_CLIENT_ID': '',
+    'WECHAT_CLIENT_SECRET': ''
 }
 
 
@@ -294,6 +296,12 @@ class Config:
         self.BATCH_UPLOAD_LIMIT = get_env('BATCH_UPLOAD_LIMIT')
 
         self.API_COMPRESSION_ENABLED = get_bool_env('API_COMPRESSION_ENABLED')
+        
+        # ------------------------
+        # 微信小程序登录设置.
+        # ------------------------
+        self.WECHAT_CLIENT_ID = get_env('WECHAT_CLIENT_ID')
+        self.WECHAT_CLIENT_SECRET = get_env('WECHAT_CLIENT_SECRET') 
 
 
 class CloudEditionConfig(Config):

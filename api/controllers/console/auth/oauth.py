@@ -8,7 +8,7 @@ from flask_restful import Resource
 
 from constants.languages import languages
 from extensions.ext_database import db
-from libs.oauth import GitHubOAuth, GoogleOAuth, OAuthUserInfo
+from libs.oauth import WeChatOAuth, GitHubOAuth, GoogleOAuth, OAuthUserInfo
 from models.account import Account, AccountStatus
 from services.account_service import AccountService, RegisterService, TenantService
 
@@ -29,11 +29,9 @@ def get_oauth_providers():
                                    redirect_uri=current_app.config.get(
                                        'CONSOLE_API_URL') + '/console/api/oauth/authorize/google')
 
-        wechat_oauth = GitHubOAuth(client_id=current_app.config.get('WECHAT_CLIENT_ID'),
-                                   client_secret=current_app.config.get(
-                                       'WECHAT_CLIENT_SECRET'),
-                                   redirect_uri=current_app.config.get(
-                                       'CONSOLE_API_URL') + '/console/api/oauth/authorize/wechat')
+        wechat_oauth = WeChatOAuth(client_id=current_app.config.get('WECHAT_CLIENT_ID'),
+                                   client_secret=current_app.config.get('WECHAT_CLIENT_SECRET'),
+                                   redirect_uri=current_app.config.get('CONSOLE_API_URL') + '/console/api/oauth/authorize/wechat')
         OAUTH_PROVIDERS = {
             'github': github_oauth,
             'google': google_oauth,
@@ -105,6 +103,10 @@ def _generate_account(provider: str, user_info: OAuthUserInfo):
     account = _get_account_by_openid_or_email(provider, user_info)
 
     if not account:
+        # 微信用户可能没有email，需要特殊处理
+        if not user_info.email:
+            user_info.email = f"{user_info.id}@wechat.noreply"
+            
         # Create account
         account_name = user_info.name if user_info.name else 'Baizeai'
         account = RegisterService.register(

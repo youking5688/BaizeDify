@@ -135,4 +135,49 @@ class GoogleOAuth(OAuth):
             email=raw_info['email']
         )
 
+class WeChatOAuth(OAuth):
+    _AUTH_URL = 'https://open.weixin.qq.com/connect/qrconnect'
+    _TOKEN_URL = 'https://api.weixin.qq.com/sns/oauth2/access_token'
+    _USER_INFO_URL = 'https://api.weixin.qq.com/sns/userinfo'
 
+    def get_authorization_url(self):
+        params = {
+            'appid': self.client_id,
+            'redirect_uri': self.redirect_uri,
+            'response_type': 'code',
+            'scope': 'snsapi_login',  # 通常用于网页应用
+            'state': 'SOME_STATE'  # 防止CSRF攻击，建议随机生成并验证
+        }
+        return f"{self._AUTH_URL}?{urllib.parse.urlencode(params)}#wechat_redirect"
+
+    def get_access_token(self, code: str):
+        params = {
+            'appid': self.client_id,
+            'secret': self.client_secret,
+            'code': code,
+            'grant_type': 'authorization_code'
+        }
+        response = requests.get(self._TOKEN_URL, params=params)
+        response_json = response.json()
+
+        access_token = response_json.get('access_token')
+        if not access_token:
+            raise ValueError(f"Error in WeChat OAuth: {response_json}")
+
+        return access_token
+
+    def get_raw_user_info(self, token: str):
+        params = {
+            'access_token': token,
+            'openid': self.client_id  # 在微信中，openid和client_id一般相同
+        }
+        response = requests.get(self._USER_INFO_URL, params=params)
+        response.raise_for_status()
+        return response.json()
+
+    def _transform_user_info(self, raw_info: dict) -> OAuthUserInfo:
+        return OAuthUserInfo(
+            id=str(raw_info['openid']),  # 微信唯一标识
+            name=raw_info.get('nickname', 'Unknown'),  # 用户昵称
+            email=None  # 微信不提供邮箱信息
+        )

@@ -216,7 +216,7 @@ const NormalForm = () => {
                     <>
                       <span className={
                         classNames(
-                          style.githubIcon,
+                          style.wechatIcon,
                           'w-5 h-5 mr-2',
                         )
                       } />
@@ -240,6 +240,25 @@ const NormalForm = () => {
               </div> */}
 
               <form onSubmit={() => { }}>
+                <div className='w-full'>
+                  <a href={getPurifyHref(`${apiPrefix}/oauth/login/wechat`)}>
+                    <Button
+                      type='default'
+                      disabled={isLoading}
+                      className='w-full hover:!bg-gray-50 !text-sm !font-medium'
+                    >
+                      <>
+                        <span className={
+                          classNames(
+                            style.wechatIcon,
+                            'w-5 h-5 mr-2',
+                          )
+                        } />
+                        <span className="truncate text-gray-800">{t('login.withWechat')}</span>
+                      </>
+                    </Button>
+                  </a>
+                </div>
                 <div className='mb-5'>
                   <label htmlFor="email" className="my-2 block text-sm font-medium text-gray-900">
                     {t('login.email')}
