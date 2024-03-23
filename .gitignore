@@ -155,4 +155,8 @@ sdks/python-client/dify_client.egg-info
 
 .vscode/*
 !.vscode/launch.json
+<<<<<<< HEAD
 docker/docker-compose.yaml
+=======
+pyrightconfig.json
+>>>>>>> upstream/main
