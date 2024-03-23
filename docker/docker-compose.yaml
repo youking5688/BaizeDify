@@ -126,6 +126,10 @@ services:
       UPLOAD_FILE_SIZE_LIMIT: 50
       # 每次上传文件数上限，默认 5 个
       UPLOAD_FILE_BATCH_LIMIT: 5
+      # Wechat configuration
+      # Wechat configuration
+      WECHAT_CLIENT_ID: 'wx722a83422357d522'
+      WECHAT_CLIENT_SECRET: 'edac624e2da45e0f05773b01250715e3'
     depends_on:
       - db
       - redis
@@ -243,8 +247,8 @@ services:
     volumes:
       - ./volumes/db/data:/var/lib/postgresql/data
     # uncomment to expose db(postgresql) port to host
-    # ports:
-    #   - "5432:5432"
+    ports:
+      - "5432:5432"
     healthcheck:
       test: [ "CMD", "pg_isready" ]
       interval: 1s
