@@ -4,15 +4,15 @@
 
 这份指南，就像 白泽AI 本身一样，是一个不断改进的工作。如果有时它落后于实际项目，我们非常感谢你的理解，并欢迎任何反馈以供我们改进。
 
-在许可方面，请花一分钟阅读我们简短的[许可证和贡献者协议](./license)。社区还遵守[行为准则](https://github.com/youking5688/.github/blob/main/CODE_OF_CONDUCT.md)。
+在许可方面，请花一分钟阅读我们简短的[许可证和贡献者协议](./license)。
 
 ## 在开始之前
 
-[查找](https://github.com/youking5688/BaizeDify/issues?q=is:issue+is:closed)现有问题，或[创建](https://github.com/youking5688/BaizeDify/issues/new/choose)一个新问题。我们将问题分为两类：
+我们将问题分为两类：
 
 ### 功能请求：
 
-* 如果您要提出新的功能请求，请解释所提议的功能的目标，并尽可能提供详细的上下文。[@perzeusss](https://github.com/perzeuss)制作了一个很好的[功能请求助手](https://uBaizeAI.app/chat/MK2kVSnw1gakVwMX)，可以帮助您起草需求。随时尝试一下。
+* 如果您要提出新的功能请求，请解释所提议的功能的目标，并尽可能提供详细的上下文。
 
 * 如果您想从现有问题中选择一个，请在其下方留下评论表示您的意愿。
 
@@ -23,7 +23,7 @@
   | Feature Type                                                 | Priority        |
   | ------------------------------------------------------------ | --------------- |
   | High-Priority Features as being labeled by a team member     | High Priority   |
-  | Popular feature requests from our [community feedback board](https://feedback.BaizeAI.ai/) | Medium Priority |
+  | Popular feature requests                                     | Medium Priority |
   | Non-core features and minor enhancements                     | Low Priority    |
   | Valuable but not immediate                                   | Future-Feature  |
 
@@ -50,7 +50,7 @@
 从终端克隆fork的仓库：
 
 ```
-git clone git@github.com:<github_username>/BaizeAI.git
+git clone 
 ```
 
 ### 3. 验证依赖项
@@ -67,7 +67,7 @@ BaizeAI 依赖以下工具和库：
 
 BaizeAI由后端和前端组成。通过`cd api/`导航到后端目录，然后按照[后端README](api/README.md)进行安装。在另一个终端中，通过`cd web/`导航到前端目录，然后按照[前端README](web/README.md)进行安装。
 
-查看[安装常见问题解答](https://docs.BaizeAI.ai/getting-started/faq/install-faq)以获取常见问题列表和故障排除步骤。
+查看[安装常见问题解答](https://docs.baizeai.nextv.show/getting-started/faq/install-faq)以获取常见问题列表和故障排除步骤。
 
 ### 5. 在浏览器中访问BaizeAI
 
@@ -75,11 +75,10 @@ BaizeAI由后端和前端组成。通过`cd api/`导航到后端目录，然后�
 
 ## 开发
 
-如果您要添加模型提供程序，请参考[此指南](https://github.com/youking5688/BaizeDify/blob/main/api/core/model_runtime/README.md)。
+如果您要添加模型提供程序，请参考[此指南](./api/core/model_runtime/README.md)。
 
 如果您要向Agent或Workflow添加工具提供程序，请参考[此指南](./api/core/tools/README.md)。
 
-为了帮助您快速了解您的贡献在哪个部分，以下是BaizeAI后端和前端的简要注释大纲：
 
 ### 后端
 
@@ -132,13 +131,3 @@ BaizeAI的后端使用Python编写，使用[Flask](https://flask.palletsprojects
 ├── types                 // descriptions of function params and return values
 └── utils                 // Shared utility functions
 ```
-
-## 提交你的 PR
-
-最后，是时候向我们的仓库提交一个拉取请求（PR）了。对于重要的功能，我们首先将它们合并到 `deploy/dev` 分支进行测试，然后再合并到 `main` 分支。如果你遇到合并冲突或者不知道如何提交拉取请求的问题，请查看 [GitHub 的拉取请求教程](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests)。
-
-就是这样！一旦你的 PR 被合并，你将成为我们 [README](https://github.com/youking5688/BaizeDify/blob/main/README.md) 中的贡献者。
-
-## 获取帮助
-
-如果你在贡献过程中遇到困难或者有任何问题，可以通过相关的 GitHub 问题提出你的疑问，或者加入我们的 [Discord](https://discord.gg/AhzKf7dNgk) 进行快速交流。
