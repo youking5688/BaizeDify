@@ -862,6 +862,8 @@ class EndUser(UserMixin, db.Model):
     type = db.Column(db.String(255), nullable=False)
     external_user_id = db.Column(db.String(255), nullable=True)
     name = db.Column(db.String(255))
+    phone = db.Column(db.String(255))
+    tokens = db.Column(db.Integer, nullable=True)
     is_anonymous = db.Column(db.Boolean, nullable=False, server_default=db.text('true'))
     session_id = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, server_default=db.text('CURRENT_TIMESTAMP(0)'))
