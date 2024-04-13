@@ -402,6 +402,7 @@ const translation = {
     promptEng: 'Orchestrate',
     apiAccess: 'API Access',
     logAndAnn: 'Logs & Ann.',
+    logs: 'Logs',
   },
   environment: {
     testing: 'TESTING',
@@ -478,6 +479,10 @@ const translation = {
       item: {
         title: 'Variables & External Tools',
         desc: 'Insert Variables & External Tools',
+      },
+      outputToolDisabledItem: {
+        title: 'Variables',
+        desc: 'Insert Variables',
       },
       modal: {
         add: 'New variable',
