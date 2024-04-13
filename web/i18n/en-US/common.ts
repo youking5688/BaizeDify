@@ -392,7 +392,7 @@ const translation = {
     type: 'Type',
   },
   about: {
-    changeLog: 'Changlog',
+    changeLog: 'Changelog',
     updateNow: 'Update now',
     nowAvailable: 'BaizeAI {{version}} is now available.',
     latestAvailable: 'BaizeAI {{version}} is the latest version available.',

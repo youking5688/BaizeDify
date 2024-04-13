@@ -17,6 +17,7 @@ export type I18nText = {
   'it-IT': string
   'uk-UA': string
   'vi-VN': string
+  'de_DE': string
 }
 
 export const languages = [
@@ -100,7 +101,7 @@ export const languages = [
   },
   {
     value: 'vi-VN',
-    name: 'Tiếng Việt(Việt Nam)',
+    name: 'Tiếng Việt (Việt Nam)',
     example: 'Xin chào, Dify!',
     supported: true,
   },
