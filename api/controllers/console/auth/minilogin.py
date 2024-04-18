@@ -31,7 +31,8 @@ class MiniLogin(Resource):
         phone_url = f'https://api.weixin.qq.com/wxa/business/getuserphonenumber?access_token={access_token}'
         phone_response = requests.post(phone_url, json={'code': args['code']})
         phone_data = phone_response.json()
-        phone = phone_data.phone_info.phoneNumber
+        
+        phone = phone_data.get('phone_info', {}).get('phoneNumber')
         # 查询用户是否为新用户
         user = db.session.query(EndUser).filter(EndUser.phone == phone).first()
         # 发放tokens
