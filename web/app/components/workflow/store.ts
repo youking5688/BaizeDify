@@ -1,8 +1,8 @@
 import { useContext } from 'react'
 import {
-  create,
   useStore as useZustandStore,
 } from 'zustand'
+import { createStore } from 'zustand/vanilla'
 import { debounce } from 'lodash-es'
 import type { Viewport } from 'reactflow'
 import type {
@@ -21,6 +21,7 @@ import { WorkflowContext } from './context'
 
 type Shape = {
   appId: string
+  panelWidth: number
   workflowRunningData?: WorkflowRunningData
   setWorkflowRunningData: (workflowData: WorkflowRunningData) => void
   historyWorkflowData?: HistoryWorkflowData
@@ -70,9 +71,10 @@ type Shape = {
 }
 
 export const createWorkflowStore = () => {
-  return create<Shape>(set => ({
+  return createStore<Shape>(set => ({
     appId: '',
-    workflowData: undefined,
+    panelWidth: localStorage.getItem('workflow-node-panel-width') ? parseFloat(localStorage.getItem('workflow-node-panel-width')!) : 420,
+    workflowRunningData: undefined,
     setWorkflowRunningData: workflowRunningData => set(() => ({ workflowRunningData })),
     historyWorkflowData: undefined,
     setHistoryWorkflowData: historyWorkflowData => set(() => ({ historyWorkflowData })),
