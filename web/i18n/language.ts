@@ -19,6 +19,7 @@ export type I18nText = {
   'vi-VN': string
   'de_DE': string
   'zh_Hant': string
+  'pl-PL': string
 }
 
 export const languages = [
@@ -112,6 +113,12 @@ export const languages = [
     example: 'Xin chào, Dify!',
     supported: true,
   },
+  {
+    value: 'pl-PL',
+    name: 'Polski (Polish)',
+    example: 'Cześć, Dify!',
+    supported: true,
+  },
 ]
 
 export const LanguagesSupported = languages.filter(item => item.supported).map(item => item.value)
@@ -133,6 +140,7 @@ export const NOTICE_I18N = {
     de_DE: 'Wichtiger Hinweis',
     ja_JP: '重要なお知らせ',
     ko_KR: '중요 공지',
+    pl_PL: 'Ważne ogłoszenie',
     uk_UA: 'Важливе повідомлення',
     vi_VN: 'Thông báo quan trọng',
   },
